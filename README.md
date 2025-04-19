@@ -1,146 +1,92 @@
 # Text-to-Speech API
 
-A powerful and flexible Text-to-Speech (TTS) API built with FastAPI, supporting multiple TTS engines and voice customization options. This project provides both a REST API and a modern web interface for converting text to speech.
+A simple and practical Text-to-Speech API built with FastAPI. It provides a straightforward way to convert text to speech using different engines and includes a basic web interface.
 
-![Text-to-Speech API](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue?style=for-the-badge&logo=python&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-## Features
+## What it does
 
-- 🎙️ Multiple TTS Engines Support:
+- Converts text to speech using different engines:
   - Google TTS (gTTS)
   - Microsoft Edge TTS
-  - pyttsx3 (Offline)
-- 🎚️ Voice Customization:
-  - Speed control (0.5x - 2.0x)
-  - Pitch adjustment (0.5x - 2.0x)
-  - Volume control (0.0x - 2.0x)
-- 🌐 Modern Web Interface:
-  - Responsive design
-  - Real-time voice preview
-  - Easy file download
-- 🔧 API Features:
-  - RESTful endpoints
-  - Voice selection
-  - File management
-  - Health monitoring
+  - pyttsx3 (works offline)
+- Lets you adjust voice settings:
+  - Speed
+  - Pitch
+  - Volume
+- Provides a simple web interface
+- Offers basic API endpoints
 
-## Prerequisites
+## Getting Started
 
-- Python 3.8 or higher
-- pip (Python package manager)
-- Virtual environment (recommended)
+### What you need
 
-## Installation
+- Python 3.8 or newer
+- pip
+- A virtual environment (recommended)
 
-1. Clone the repository:
+### Setup
+
+1. Get the code:
 ```bash
 git clone https://github.com/globallstudent/text-to-speech-api.git
 cd text-to-speech-api
 ```
 
-2. Create and activate a virtual environment:
+2. Set up your environment:
 ```bash
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
-3. Install dependencies:
+3. Install requirements:
 ```bash
 pip install -r requirements.txt
 ```
 
-## Usage
+## How to use it
 
-### Starting the Server
+### Start the server
 
-Run the FastAPI server:
 ```bash
 uvicorn app.main:app --host 0.0.0.0 --port 8000
 ```
 
-The web interface will be available at: http://localhost:8000
+Visit http://localhost:8000 to use the web interface.
 
-### API Endpoints
+### API basics
 
-1. **Convert Text to Speech**
-   - **Endpoint**: `POST /api/tts`
-   - **Request Body**:
+1. **Convert text to speech**
+   - `POST /api/tts`
+   - Example request:
      ```json
      {
-       "text": "Hello, world!",
-       "engine": "edge-tts",
-       "language": "en",
-       "voice": "en-US-AriaNeural",
-       "speed": 1.0,
-       "pitch": 1.0,
-       "volume": 1.0
-     }
-     ```
-   - **Response**:
-     ```json
-     {
-       "status": "success",
-       "audio_url": "/static/audio/filename.mp3",
-       "processing_time": 1.23,
-       "text_preview": "Hello, world!",
-       "file_size": 12345,
-       "created_at": "2024-01-01T12:00:00Z",
+       "text": "Hello",
        "engine": "edge-tts",
        "voice": "en-US-AriaNeural"
      }
      ```
 
-2. **Get Available Voices**
-   - **Endpoint**: `GET /api/tts/voices`
-   - **Query Parameters**:
-     - `engine` (optional): Filter voices by engine
-   - **Response**:
-     ```json
-     [
-       {
-         "engine": "edge-tts",
-         "voices": [
-           {
-             "id": "en-US-AriaNeural",
-             "name": "Aria",
-             "locale": "en-US",
-             "gender": "Female",
-             "sample_rate": 24000
-           }
-         ]
-       }
-     ]
-     ```
+2. **Get available voices**
+   - `GET /api/tts/voices`
+   - Optional: `?engine=edge-tts`
 
-3. **Health Check**
-   - **Endpoint**: `GET /api/tts/health`
-   - **Response**:
-     ```json
-     {
-       "status": "ok",
-       "message": "TTS service is running",
-       "uptime": 3600.0,
-       "total_requests": 100,
-       "last_request": "2024-01-01T12:00:00Z"
-     }
-     ```
+3. **Check server status**
+   - `GET /api/tts/health`
 
-### Web Interface
+### Web interface
 
-The web interface provides an easy-to-use form for converting text to speech:
-
-1. Enter your text in the text area
-2. Select a TTS engine
-3. Choose a voice
-4. Adjust speed, pitch, and volume
-5. Click "Convert to Speech"
-6. Download the generated audio file
+The web interface is simple to use:
+1. Type your text
+2. Pick an engine and voice
+3. Adjust settings if needed
+4. Click convert
+5. Download the audio if you want
 
 ## Project Structure
 
-```
 text-to-speech-api/
 ├── app/
 │   ├── main.py           # FastAPI application
@@ -161,26 +107,24 @@ text-to-speech-api/
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+Feel free to help improve this project. Just:
+1. Fork the repo
+2. Make your changes
+3. Submit a pull request
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+## Thanks
+
+This project uses:
+- [FastAPI](https://fastapi.tiangolo.com/)
+- [gTTS](https://gtts.readthedocs.io/)
+- [Edge TTS](https://github.com/rany2/edge-tts)
+- [pyttsx3](https://pyttsx3.readthedocs.io/)
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- [FastAPI](https://fastapi.tiangolo.com/) - The web framework used
-- [gTTS](https://gtts.readthedocs.io/) - Google Text-to-Speech
-- [Edge TTS](https://github.com/rany2/edge-tts) - Microsoft Edge TTS
-- [pyttsx3](https://pyttsx3.readthedocs.io/) - Offline TTS engine
+MIT License - see [LICENSE](LICENSE)
 
 ## Contact
 
 - GitHub: [@globallstudent](https://github.com/globallstudent)
-- Portfolio: [globalstudent.uz](https://globalstudent.uz)
+- Website: [globalstudent.uz](https://globalstudent.uz)
