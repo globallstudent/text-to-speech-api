@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text to Speech API Documentation</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        .api-docs {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .endpoint {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .endpoint-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .method {
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+
+        .method.get { background: #61affe; color: white; }
+        .method.post { background: #49cc90; color: white; }
+
+        .path {
+            font-family: monospace;
+            font-size: 1.1rem;
+        }
+
+        .description {
+            margin-bottom: 1.5rem;
+            color: #666;
+        }
+
+        .section {
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        pre {
+            background: #f5f5f5;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 0.5rem 0;
+        }
+
+        code {
+            font-family: monospace;
+            background: #f5f5f5;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+        }
+
+        .response-example {
+            margin-top: 1rem;
+        }
+
+        .nav {
+            background: white;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nav a {
+            color: var(--primary-color);
+            text-decoration: none;
+            margin-right: 1rem;
+        }
+
+        .nav a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <div class="container">
+            <a href="/">Home</a>
+            <a href="/api-docs.html">API Documentation</a>
+        </div>
+    </div>
+
+    <div class="api-docs">
+        <h1>Text to Speech API Documentation</h1>
+        <p class="description">
+            This API allows you to convert text to speech using multiple TTS engines. 
+            All endpoints are available at the base URL: <code>/api/tts</code>
+        </p>
+
+        <div class="endpoint">
+            <div class="endpoint-header">
+                <span class="method post">POST</span>
+                <span class="path">/api/tts</span>
+            </div>
+            <p class="description">Convert text to speech and return the audio file URL.</p>
+
+            <div class="section">
+                <div class="section-title">Request Body</div>
+                <pre>{
+    "text": "Hello, world!",
+    "engine": "edge-tts",
+    "language": "en",
+    "voice": "en-US-AriaNeural",
+    "speed": 1.0,
+    "pitch": 1.0,
+    "volume": 1.0
+}</pre>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Parameters</div>
+                <ul>
+                    <li><code>text</code> (required): The text to convert to speech</li>
+                    <li><code>engine</code> (optional): TTS engine to use (edge-tts, gtts, pyttsx3)</li>
+                    <li><code>language</code> (optional): Language code (e.g., en, uz, ru)</li>
+                    <li><code>voice</code> (optional): Voice ID (e.g., en-US-AriaNeural)</li>
+                    <li><code>speed</code> (optional): Speech speed (0.5 to 2.0)</li>
+                    <li><code>pitch</code> (optional): Voice pitch (0.5 to 2.0)</li>
+                    <li><code>volume</code> (optional): Volume level (0.0 to 2.0)</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Response</div>
+                <div class="response-example">
+                    <pre>{
+    "status": "success",
+    "audio_url": "/static/audio/filename.mp3",
+    "processing_time": 1.23,
+    "text_preview": "Hello, world!",
+    "file_size": 12345,
+    "created_at": "2024-01-01T12:00:00Z",
+    "engine": "edge-tts",
+    "voice": "en-US-AriaNeural"
+}</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="endpoint">
+            <div class="endpoint-header">
+                <span class="method get">GET</span>
+                <span class="path">/api/tts/voices</span>
+            </div>
+            <p class="description">Get available voices for all TTS engines.</p>
+
+            <div class="section">
+                <div class="section-title">Query Parameters</div>
+                <ul>
+                    <li><code>engine</code> (optional): Filter voices by engine (edge-tts, gtts, pyttsx3)</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Response</div>
+                <div class="response-example">
+                    <pre>[
+    {
+        "engine": "edge-tts",
+        "voices": [
+            {
+                "id": "en-US-AriaNeural",
+                "name": "Aria",
+                "locale": "en-US",
+                "gender": "Female",
+                "sample_rate": 24000
+            }
+        ]
+    }
+]</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="endpoint">
+            <div class="endpoint-header">
+                <span class="method get">GET</span>
+                <span class="path">/api/tts/health</span>
+            </div>
+            <p class="description">Check the health status of the TTS service.</p>
+
+            <div class="section">
+                <div class="section-title">Response</div>
+                <div class="response-example">
+                    <pre>{
+    "status": "ok",
+    "message": "TTS service is running",
+    "uptime": 3600.0,
+    "total_requests": 100,
+    "last_request": "2024-01-01T12:00:00Z"
+}</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Error Responses</div>
+            <p>All endpoints may return the following error responses:</p>
+            <ul>
+                <li><code>400 Bad Request</code>: Invalid request parameters</li>
+                <li><code>500 Internal Server Error</code>: Server-side error</li>
+            </ul>
+            <div class="response-example">
+                <pre>{
+    "detail": "Error message describing what went wrong"
+}</pre>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
