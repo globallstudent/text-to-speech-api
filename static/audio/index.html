@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text to Speech Converter</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Text to Speech</h1>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active" data-section="converter">Converter</a></li>
+                    <li><a href="#" data-section="about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="converter" class="section active">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Convert Text to Speech</h2>
+                </div>
+                <div class="card-body">
+                    <form id="tts-form">
+                        <div class="form-group">
+                            <label for="text">Enter Text</label>
+                            <textarea id="text" placeholder="Type or paste your text here..." required></textarea>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="engine">TTS Engine</label>
+                                <select id="engine">
+                                    <option value="edge-tts">Edge TTS (Best Quality)</option>
+                                    <option value="gtts">Google TTS (Online)</option>
+                                    <option value="pyttsx3">PyTTSx3 (Offline)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="voice">Voice</label>
+                                <select id="voice">
+                                    <option value="">Loading voices...</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="speed">Speed</label>
+                                <input type="range" id="speed" min="0.5" max="2" step="0.1" value="1">
+                                <div class="range-value">1.0</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <button type="submit" class="btn" id="convert-btn">
+                                <i class="fas fa-play"></i> Convert to Speech
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="card" id="result-card" style="display: none;">
+                <div class="card-header">
+                    <h2>Generated Speech</h2>
+                </div>
+                <div class="card-body">
+                    <div id="text-preview" class="text-preview"></div>
+                    
+                    <div class="audio-player">
+                        <audio id="audio-player" controls></audio>
+                    </div>
+                    
+                    <div class="actions">
+                        <button class="btn btn-secondary" id="download-btn">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>Generating speech...</p>
+            </div>
+        </section>
+        
+        <section id="about" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h2>About This Project</h2>
+                </div>
+                <div class="card-body">
+                    <h3>Project Overview</h3>
+                    <p>
+                        This Text-to-Speech (TTS) web application converts written text into spoken audio using multiple high-quality speech synthesis engines, including Microsoft Edge TTS, Google TTS, and offline PyTTSx3.
+                    </p>
+                    
+                    <h3>Features</h3>
+                    <ul>
+                        <li>Convert text to natural-sounding speech</li>
+                        <li>Choose from multiple TTS engines</li>
+                        <li>Select from a wide variety of voices</li>
+                        <li>Adjust speech speed</li>
+                        <li>Download generated audio files</li>
+                    </ul>
+                    
+                    <h3>About the Developer</h3>
+                    <div class="developer-info">
+                        <div class="developer-image">
+                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=developer" alt="Developer">
+                        </div>
+                        <div class="developer-details">
+                            <h4>Your Name</h4>
+                            <p>Full-stack developer with a passion for AI and speech technologies. This project demonstrates my interest in creating accessible tools that bridge the gap between text and speech.</p>
+                            <div class="social-links">
+                                <a href="https://github.com/yourusername" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                                <a href="https://linkedin.com/in/yourusername" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                                <a href="mailto:your.email@example.com" title="Email"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3>Technical Stack</h3>
+                    <p>
+                        This application is built using modern web technologies:
+                    </p>
+                    <ul>
+                        <li><strong>Backend:</strong> FastAPI (Python)</li>
+                        <li><strong>TTS Engines:</strong> Edge-TTS, gTTS, PyTTSx3</li>
+                        <li><strong>Frontend:</strong> HTML5, CSS3, JavaScript</li>
+                        <li><strong>Deployment:</strong> Docker, GitHub Actions</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Text to Speech Converter. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
