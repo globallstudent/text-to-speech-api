@@ -8,6 +8,8 @@ A simple and practical Text-to-Speech API built with FastAPI. It provides a stra
 
 ## What it does
 
+![alt text](image.png)
+
 - Converts text to speech using different engines:
   - Google TTS (gTTS)
   - Microsoft Edge TTS
