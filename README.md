@@ -85,8 +85,8 @@ The web interface is simple to use:
 4. Click convert
 5. Download the audio if you want
 
-## Project Structure
-
+### Project Structure
+```
 text-to-speech-api/
 ├── app/
 │   ├── main.py           # FastAPI application
